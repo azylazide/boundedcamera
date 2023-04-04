@@ -1,0 +1,145 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb7qndxikp1y3"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_q6qm7"]
+[ext_resource type="Script" path="res://CameraArea.gd" id="1_wmien"]
+[ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="1_y4s8a"]
+[ext_resource type="Script" path="res://RemoteCamera.gd" id="4_0w627"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg4uo"]
+size = Vector2(4861, 3193)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vg6m4"]
+size = Vector2(9045.5, 4702.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14ehg"]
+radius = 70.1142
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4d6e8"]
+radius = 159.0
+
+[node name="World" type="Node2D"]
+
+[node name="CameraBounds" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.14902)
+
+[node name="CameraArea" type="Area2D" parent="CameraBounds"]
+collision_layer = 16
+script = ExtResource("1_wmien")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea"]
+shape = SubResource("RectangleShape2D_xg4uo")
+
+[node name="CameraArea2" type="Area2D" parent="CameraBounds"]
+position = Vector2(7012, -741)
+collision_layer = 16
+script = ExtResource("1_wmien")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea2"]
+shape = SubResource("RectangleShape2D_vg6m4")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-1441.5, -402.5)
+scale = Vector2(5.17969, 5.67969)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(635.5, 816)
+scale = Vector2(17.1484, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon3" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1426.5, -788)
+scale = Vector2(8.24219, 3.5625)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon4" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-445, -51)
+scale = Vector2(1.76172, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon5" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(3965, -987)
+scale = Vector2(1.76172, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon6" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(4644, 432)
+scale = Vector2(1.76172, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon7" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(4962, -564)
+scale = Vector2(1.76172, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon8" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2432, -131)
+scale = Vector2(1.76172, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon9" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2462, 796)
+scale = Vector2(1.76172, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon10" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(6247.13, 1693)
+scale = Vector2(45.623, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon12" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(58, -1542)
+scale = Vector2(45.623, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon13" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(11496, -410)
+scale = Vector2(5.85058, 28.8516)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon14" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(8340, -771)
+scale = Vector2(26.8862, 3.74609)
+texture = ExtResource("1_y4s8a")
+
+[node name="Icon11" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-728, 1743)
+scale = Vector2(45.623, 4.45313)
+texture = ExtResource("1_y4s8a")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+motion_mode = 1
+script = ExtResource("1_q6qm7")
+
+[node name="Icon" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_y4s8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_14ehg")
+
+[node name="CameraBoundDetector" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CameraBoundDetector"]
+shape = SubResource("CircleShape2D_4d6e8")
+
+[node name="RemoteCamera" type="Camera2D" parent="." node_paths=PackedStringArray("playernode", "cameraboundcontainer")]
+zoom = Vector2(0.4, 0.4)
+script = ExtResource("4_0w627")
+playernode = NodePath("../Player")
+cameraboundcontainer = NodePath("../CameraBounds")

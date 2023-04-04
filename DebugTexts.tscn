@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ciptnwn7nrp"]
+
+[node name="DebugTexts" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 23.0
+
+[node name="Label" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label2" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
