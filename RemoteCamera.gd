@@ -78,10 +78,10 @@ func _clamp_pos(pos: Vector2) -> Vector2:
 		var limit_arrays = {"left":[],"right":[],"top":[],"bottom":[],"priority":[]}
 
 		for area in bbox_array:
-			limit_arrays.left.append(int(area.limits.left) if area.limit_flags & 0b1000 else default_limits.left)
-			limit_arrays.right.append(int(area.limits.right) if area.limit_flags & 0b0100 else default_limits.right)
-			limit_arrays.top.append(int(area.limits.top) if area.limit_flags & 0b0010 else default_limits.top)
-			limit_arrays.bottom.append(int(area.limits.bottom) if area.limit_flags & 0b0001 else default_limits.bottom)
+			limit_arrays.left.append(int(area.limits.left) if area.limit_flags & 0b1 else default_limits.left)
+			limit_arrays.right.append(int(area.limits.right) if area.limit_flags & 0b1 << 1 else default_limits.right)
+			limit_arrays.top.append(int(area.limits.top) if area.limit_flags & 0b1 << 2 else default_limits.top)
+			limit_arrays.bottom.append(int(area.limits.bottom) if area.limit_flags & 0b1 << 3 else default_limits.bottom)
 
 			limit_arrays.priority.append(area.priority_level)
 

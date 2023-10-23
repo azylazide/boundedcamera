@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bb7qndxikp1y3"]
+[gd_scene load_steps=11 format=3 uid="uid://bb7qndxikp1y3"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q6qm7"]
 [ext_resource type="Script" path="res://CameraArea.gd" id="1_wmien"]
@@ -9,6 +9,12 @@
 size = Vector2(4861, 3193)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg6m4"]
+size = Vector2(9045.5, 4702.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rpti"]
+size = Vector2(8123.75, 1750)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5afc1"]
 size = Vector2(9045.5, 4702.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_14ehg"]
@@ -36,6 +42,25 @@ script = ExtResource("1_wmien")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea2"]
 shape = SubResource("RectangleShape2D_vg6m4")
+
+[node name="CameraArea3" type="Area2D" parent="CameraBounds"]
+position = Vector2(15106, -869)
+collision_layer = 16
+script = ExtResource("1_wmien")
+priority_level = 1
+limit_flags = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea3"]
+position = Vector2(460.875, 140)
+shape = SubResource("RectangleShape2D_6rpti")
+
+[node name="CameraArea4" type="Area2D" parent="CameraBounds"]
+position = Vector2(23443, -741)
+collision_layer = 16
+script = ExtResource("1_wmien")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea4"]
+shape = SubResource("RectangleShape2D_5afc1")
 
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
