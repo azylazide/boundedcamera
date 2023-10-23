@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcfigfknx2543"]
+[gd_scene load_steps=10 format=3 uid="uid://dcfigfknx2543"]
 
 [ext_resource type="Script" path="res://CameraArea.gd" id="1_55yu6"]
 [ext_resource type="Script" path="res://Player.gd" id="2_lgomv"]
@@ -10,6 +10,9 @@ size = Vector2(1362, 838)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4nck7"]
 size = Vector2(1362, 2203)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jygvi"]
+size = Vector2(2103, 1149)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tcniv"]
 radius = 28.4429
@@ -37,6 +40,39 @@ script = ExtResource("1_55yu6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea2"]
 position = Vector2(0, -682.5)
 shape = SubResource("RectangleShape2D_4nck7")
+
+[node name="CameraArea4" type="Area2D" parent="CameraBounds"]
+position = Vector2(-1368, 1714)
+script = ExtResource("1_55yu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea4"]
+position = Vector2(1476, 422)
+shape = SubResource("RectangleShape2D_4nck7")
+
+[node name="CameraArea3" type="Area2D" parent="CameraBounds"]
+position = Vector2(-967, -664)
+script = ExtResource("1_55yu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea3"]
+position = Vector2(370.5, -155.5)
+shape = SubResource("RectangleShape2D_jygvi")
+
+[node name="CameraArea5" type="Area2D" parent="CameraBounds"]
+position = Vector2(1264, 1987)
+script = ExtResource("1_55yu6")
+limit_flags = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea5"]
+position = Vector2(370.5, -155.5)
+shape = SubResource("RectangleShape2D_jygvi")
+
+[node name="CameraArea6" type="Area2D" parent="CameraBounds"]
+position = Vector2(3201, 2296)
+script = ExtResource("1_55yu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea6"]
+position = Vector2(370.5, -155.5)
+shape = SubResource("RectangleShape2D_jygvi")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_lgomv")
