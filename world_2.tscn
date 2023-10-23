@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://dcfigfknx2543"]
+
+[ext_resource type="Script" path="res://CameraArea.gd" id="1_55yu6"]
+[ext_resource type="Script" path="res://Player.gd" id="2_lgomv"]
+[ext_resource type="Script" path="res://ClassicalCamera.gd" id="3_36lrw"]
+[ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="4_ibop6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a03fd"]
+size = Vector2(1362, 838)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nck7"]
+size = Vector2(1362, 2203)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tcniv"]
+radius = 28.4429
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3tfox"]
+radius = 54.0093
+
+[node name="World2" type="Node2D"]
+
+[node name="CameraBounds" type="Node2D" parent="."]
+
+[node name="CameraArea" type="Area2D" parent="CameraBounds"]
+position = Vector2(532, 291)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_55yu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea"]
+shape = SubResource("RectangleShape2D_a03fd")
+
+[node name="CameraArea2" type="Area2D" parent="CameraBounds"]
+position = Vector2(1916, 174)
+script = ExtResource("1_55yu6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds/CameraArea2"]
+position = Vector2(0, -682.5)
+shape = SubResource("RectangleShape2D_4nck7")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("2_lgomv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_tcniv")
+
+[node name="CameraBoundDetector" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/CameraBoundDetector"]
+shape = SubResource("CircleShape2D_3tfox")
+
+[node name="Camera2D" type="Camera2D" parent="Player" node_paths=PackedStringArray("playernode")]
+position_smoothing_enabled = true
+script = ExtResource("3_36lrw")
+playernode = NodePath("..")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(531.5, 691)
+scale = Vector2(11.3516, 1)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(549, -118)
+scale = Vector2(11.3516, 1)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon3" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1917, 595)
+scale = Vector2(11.3516, 1)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon4" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1925, -1603)
+scale = Vector2(11.3516, 1)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon5" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-141, 287)
+scale = Vector2(0.652342, 4.78906)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon6" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(826, 287)
+scale = Vector2(1.28711, 1.18359)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon7" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1689, -558)
+scale = Vector2(1.28711, 1.18359)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon8" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2252, 194)
+scale = Vector2(1.28711, 1.18359)
+texture = ExtResource("4_ibop6")
+
+[node name="Icon9" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(2288, -438)
+scale = Vector2(1.28711, 1.18359)
+texture = ExtResource("4_ibop6")
