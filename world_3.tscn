@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://5wxrusotbm60"]
+
+[ext_resource type="Script" path="res://CameraArea2.gd" id="1_trad5"]
+[ext_resource type="Script" path="res://Player.gd" id="2_el83p"]
+[ext_resource type="Script" path="res://remote_camera2_sample.gd" id="3_3bndr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wmr5"]
+size = Vector2(1226, 689)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dsob"]
+size = Vector2(1226, 689)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ilvy"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c06q3"]
+radius = 128.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xubqs"]
+noise_type = 3
+seed = 69
+
+[node name="World3" type="Node2D"]
+
+[node name="CameraArea2" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_trad5")
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea2"]
+position = Vector2(579, 316.5)
+shape = SubResource("RectangleShape2D_6wmr5")
+
+[node name="CameraArea3" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(1241, 0)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_trad5")
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea3"]
+position = Vector2(579, 316.5)
+shape = SubResource("RectangleShape2D_0dsob")
+
+[node name="CameraArea4" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(605, 725)
+collision_layer = 16
+monitoring = false
+script = ExtResource("1_trad5")
+priority_level = 2
+limit_flags = 11
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea4"]
+position = Vector2(579, 316.5)
+shape = SubResource("RectangleShape2D_0dsob")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("2_el83p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_4ilvy")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+shape = SubResource("CircleShape2D_c06q3")
+
+[node name="RemoteCamera2" type="Camera2D" parent="." node_paths=PackedStringArray("followed_node")]
+process_callback = 0
+script = ExtResource("3_3bndr")
+noise = SubResource("FastNoiseLite_xubqs")
+followed_node = NodePath("../CharacterBody2D")
+
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="RemoteCamera2" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="CharacterBody2D/Area2D" to="RemoteCamera2" method="_on_area_2d_area_exited"]
