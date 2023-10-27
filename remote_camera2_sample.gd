@@ -27,12 +27,13 @@ func shake():
 	offset = _offset
 
 func _process(delta):
-	if not follow:
-		if trauma:
-			trauma = max(trauma - decay * delta, 0)
-			shake()
-		else:
-			follow = true
+#	if not follow:
+#		if trauma:
+#			trauma = max(trauma - decay * delta, 0)
+#			shake()
+#		else:
+#			follow = true
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):

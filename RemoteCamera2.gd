@@ -42,7 +42,8 @@ class LimitArrayContainer:
 
 func _ready() -> void:
 	bounds = BoundsContainer.new(bridge_inf)
-
+	if not follow:
+		global_position = initial_pos + offset
 
 	DebugTexts.get_node("Control/HBoxContainer/Label2").text = str(get_viewport_rect())
 	DebugTexts.get_node("Control/HBoxContainer/Label3").text = str(get_viewport_rect().size /zoom.x)
@@ -145,7 +146,7 @@ func _clamp_pos(pos: Vector2) -> Vector2:
 
 
 	var debug_string = "cam: (%.00f,%.00f) C(%.00f,%.00f)\nL: %.00f R: %.00f\nT: %.00f B: %.00f"
-	var format_array = [output.x,output.y,clamped_pos.x,clamped_pos.y,bounds.left,bounds.right,bounds.top,bounds.bottom]
+	var format_array = [global_position.x,global_position.y,clamped_pos.x,clamped_pos.y,bounds.left,bounds.right,bounds.top,bounds.bottom]
 
 	DebugTexts.get_node("Control/HBoxContainer/Label").text = debug_string %format_array
 

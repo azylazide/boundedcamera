@@ -23,8 +23,11 @@ func _init() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	limits = LimitContainer.new()
+	set_limits()
+
+func set_limits() -> void:
 	#compute limits in global coords
-	limits.left = collision.global_position.x-collision.shape.extents.x
-	limits.right = collision.global_position.x+collision.shape.extents.x
-	limits.top = collision.global_position.y-collision.shape.extents.y
-	limits.bottom = collision.global_position.y+collision.shape.extents.y
+	limits.left = collision.global_position.x-collision.shape.get_rect().size.x*0.5
+	limits.right = collision.global_position.x+collision.shape.get_rect().size.x*0.5
+	limits.top = collision.global_position.y-collision.shape.get_rect().size.y*0.5
+	limits.bottom = collision.global_position.y+collision.shape.get_rect().size.y*0.5
