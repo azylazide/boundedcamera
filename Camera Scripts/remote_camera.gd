@@ -78,6 +78,7 @@ func _physics_process(delta: float) -> void:
 
 func process_camera_position() -> void:
 	var new_pos:= _updated_position()
+	bounds = calculate_limits()
 	clamped_pos = _clamp_pos(new_pos)
 	interped_pos = _interp_pos(global_position)
 
@@ -88,8 +89,7 @@ func process_camera_position() -> void:
 func _updated_position() -> Vector2:
 	return followed_node.global_position + offset
 
-func _clamp_pos(pos: Vector2) -> Vector2:
-	var output: Vector2
+func calculate_limits() -> BoundsContainer:
 
 	var default_limits: BoundsContainer = BoundsContainer.new(bridge_inf)
 
@@ -129,25 +129,17 @@ func _clamp_pos(pos: Vector2) -> Vector2:
 				if absi(temp_limits.bottom) < absi(limit_arrays.bottom[i]):
 					temp_limits.bottom = limit_arrays.bottom[i]
 
-		output.x = clampf(pos.x,temp_limits.left+0.5*camera_span.x,temp_limits.right-0.5*camera_span.x)
-		output.y = clampf(pos.y,temp_limits.top+0.5*camera_span.y,temp_limits.bottom-0.5*camera_span.y)
-
-		bounds.left = temp_limits.left
-		bounds.right = temp_limits.right
-		bounds.top = temp_limits.top
-		bounds.bottom = temp_limits.bottom
-
-
-	#if detector exited
+		return temp_limits
 
 	else:
-		output.x = clampf(pos.x,default_limits.left+0.5*camera_span.x,default_limits.right-0.5*camera_span.x)
-		output.y = clampf(pos.y,default_limits.top+0.5*camera_span.y,default_limits.bottom-0.5*camera_span.y)
 
-		bounds.left = default_limits.left
-		bounds.right = default_limits.right
-		bounds.top = default_limits.top
-		bounds.bottom = default_limits.bottom
+		return default_limits
+
+func _clamp_pos(pos: Vector2) -> Vector2:
+	var output: Vector2
+
+	output.x = clampf(pos.x,bounds.left+0.5*camera_span.x,bounds.right-0.5*camera_span.x)
+	output.y = clampf(pos.y,bounds.top+0.5*camera_span.y,bounds.bottom-0.5*camera_span.y)
 
 	return output
 
@@ -156,7 +148,6 @@ func _interp_pos(pos: Vector2) -> Vector2:
 
 	output.x = lerpf(pos.x,clamped_pos.x,horizontal_smoothing)
 	output.y = lerpf(pos.y,clamped_pos.y,vertical_smoothing)
-
 
 	return output
 

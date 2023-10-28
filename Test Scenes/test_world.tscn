@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bej8likwduvyf"]
+[gd_scene load_steps=17 format=3 uid="uid://bej8likwduvyf"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_pql5o"]
 [ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="2_p0gqx"]
@@ -14,7 +14,7 @@
 radius = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yi1bk"]
-radius = 149.003
+radius = 97.0052
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tesgw"]
 size = Vector2(1152, 648)
@@ -26,7 +26,10 @@ size = Vector2(1751.5, 648)
 size = Vector2(1152, 1536)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3uoq"]
-size = Vector2(954.5, 164)
+size = Vector2(1065.5, 164)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_roau7"]
+radius = 665.777
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saf75"]
 size = Vector2(2105.5, 1746)
@@ -140,8 +143,19 @@ limit_flags = 1
 collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea6"]
-position = Vector2(465.75, 433)
+position = Vector2(521.25, 433)
 shape = SubResource("RectangleShape2D_r3uoq")
+
+[node name="CameraArea7" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(-198, -1157)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea7"]
+position = Vector2(521.25, 433)
+shape = SubResource("CircleShape2D_roau7")
 
 [node name="CameraArea3" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
 position = Vector2(2649, 11)
