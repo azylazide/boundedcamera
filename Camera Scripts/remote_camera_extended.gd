@@ -1,7 +1,8 @@
 extends RemoteCamera
-
-# Player's [CameraDetector] signals can interface here
-# Make sure that the [CameraDetector] only masks [CameraArea]'s layer.
+## Extends [RemoteCamera] to interface or override functions.
+##
+## Player's [CameraDetector] signals can interface here
+## Make sure that the [CameraDetector] only masks [CameraArea]'s layer.
 
 func _ready() -> void:
 	super()

@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bej8likwduvyf"]
+[gd_scene load_steps=17 format=3 uid="uid://1xbimk64fqkm"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_pql5o"]
 [ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="2_p0gqx"]
 [ext_resource type="Script" path="res://Camera Scripts/camera_area.gd" id="3_1dxw8"]
 [ext_resource type="Script" path="res://Camera Scripts/camera_detector.gd" id="3_7806m"]
-[ext_resource type="Script" path="res://Test Scenes/remote_camera_extended.gd" id="3_sotbs"]
+[ext_resource type="Script" path="res://Camera Scripts/remote_camera_extended.gd" id="4_xaoaa"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ccui2"]
 
@@ -95,7 +95,7 @@ shape = SubResource("CircleShape2D_yi1bk")
 debug_color = Color(0.992157, 0, 0.262745, 0.419608)
 
 [node name="RemoteCamera" type="Camera2D" parent="." node_paths=PackedStringArray("followed_node")]
-script = ExtResource("3_sotbs")
+script = ExtResource("4_xaoaa")
 followed_node = NodePath("../CharacterBody2D")
 
 [node name="CameraArea" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
