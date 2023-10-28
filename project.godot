@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="camera bound tests"
-run/main_scene="res://world.tscn"
+run/main_scene="res://Test Scenes/test_world.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-DebugTexts="*res://DebugTexts.tscn"
+DebugTexts="*res://Test Scenes/DebugTexts.tscn"
 
 [display]
 

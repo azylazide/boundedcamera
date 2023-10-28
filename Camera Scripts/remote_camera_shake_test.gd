@@ -1,4 +1,4 @@
-extends RemoteCamera2
+extends RemoteCamera
 
 @export var decay := 0.8 #How quickly shaking will stop [0,1].
 @export var max_offset := Vector2(8,5) #Maximum displacement in pixels.

@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://5wxrusotbm60"]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Script" path="res://CameraArea2.gd" id="1_trad5"]
+[ext_resource type="Script" path="res://Camera Scripts/camera_area.gd" id="1_a0w1l"]
 [ext_resource type="Script" path="res://Player.gd" id="2_el83p"]
-[ext_resource type="Script" path="res://remote_camera2_sample.gd" id="3_3bndr"]
+[ext_resource type="Script" path="res://Camera Scripts/remote_camera_shake_test.gd" id="3_owmu8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wmr5"]
 size = Vector2(1226, 689)
@@ -29,7 +29,7 @@ seed = 69
 collision_layer = 16
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_trad5")
+script = ExtResource("1_a0w1l")
 collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea2"]
@@ -41,7 +41,7 @@ position = Vector2(1241, 0)
 collision_layer = 16
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_trad5")
+script = ExtResource("1_a0w1l")
 collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea3"]
@@ -52,7 +52,7 @@ shape = SubResource("RectangleShape2D_0dsob")
 position = Vector2(605, 725)
 collision_layer = 16
 monitoring = false
-script = ExtResource("1_trad5")
+script = ExtResource("1_a0w1l")
 priority_level = 2
 limit_flags = 11
 collision = NodePath("CollisionShape2D")
@@ -65,7 +65,7 @@ shape = SubResource("RectangleShape2D_0dsob")
 position = Vector2(-1521, 34)
 collision_layer = 16
 monitoring = false
-script = ExtResource("1_trad5")
+script = ExtResource("1_a0w1l")
 collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea5"]
@@ -87,7 +87,7 @@ shape = SubResource("CircleShape2D_c06q3")
 
 [node name="RemoteCamera2" type="Camera2D" parent="." node_paths=PackedStringArray("followed_node")]
 process_callback = 0
-script = ExtResource("3_3bndr")
+script = ExtResource("3_owmu8")
 noise = SubResource("FastNoiseLite_xubqs")
 followed_node = NodePath("../CharacterBody2D")
 

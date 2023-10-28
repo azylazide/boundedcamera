@@ -1,5 +1,5 @@
 extends Area2D
-class_name CameraArea2
+class_name CameraArea
 
 @export var priority_level:= 0
 @export_flags("Left","Right","Top","Bottom") var limit_flags:= 0b1111
@@ -17,12 +17,10 @@ var limits: LimitContainer
 
 func _init() -> void:
 	monitoring = false
-	set_collision_layer_value(1,false)
-	set_collision_layer_value(5,true)
+	limits = LimitContainer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	limits = LimitContainer.new()
 	set_limits()
 
 func set_limits() -> void:

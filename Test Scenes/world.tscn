@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bb7qndxikp1y3"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_q6qm7"]
-[ext_resource type="Script" path="res://CameraArea.gd" id="1_wmien"]
+[ext_resource type="Script" path="res://Legacy/CameraArea.gd" id="1_wmien"]
 [ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="1_y4s8a"]
-[ext_resource type="Script" path="res://RemoteCamera.gd" id="4_0w627"]
+[ext_resource type="Script" path="res://Legacy/RemoteCamera.gd" id="4_0w627"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg4uo"]
 size = Vector2(4861, 3193)

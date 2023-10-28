@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=3 uid="uid://bej8likwduvyf"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_pql5o"]
+[ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="2_p0gqx"]
+[ext_resource type="Script" path="res://Camera Scripts/camera_area.gd" id="3_1dxw8"]
+[ext_resource type="Script" path="res://Camera Scripts/camera_detector.gd" id="3_7806m"]
+[ext_resource type="Script" path="res://Test Scenes/remote_camera_extended.gd" id="3_sotbs"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ccui2"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kh285"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mupqn"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yi1bk"]
+radius = 149.003
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tesgw"]
+size = Vector2(1152, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16rms"]
+size = Vector2(1751.5, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqwey"]
+size = Vector2(1152, 1536)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r3uoq"]
+size = Vector2(954.5, 164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_saf75"]
+size = Vector2(2105.5, 1746)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1wjs"]
+size = Vector2(1836, 332)
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 0.109804, 0.109804, 1)
+position = Vector2(1914, -131.75)
+scale = Vector2(1734, 1088.5)
+texture = SubResource("PlaceholderTexture2D_ccui2")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+modulate = Color(1, 0.109804, 0.109804, 1)
+position = Vector2(5443.5, 185.375)
+scale = Vector2(1755, 1723.25)
+texture = SubResource("PlaceholderTexture2D_ccui2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(1, 0.109804, 0.109804, 1)
+position = Vector2(-45.2031, 207)
+scale = Vector2(82.4062, 432)
+texture = SubResource("PlaceholderTexture2D_ccui2")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+modulate = Color(1, 0.109804, 0.109804, 1)
+position = Vector2(992.5, 1441.25)
+scale = Vector2(3579, 1607.5)
+texture = SubResource("PlaceholderTexture2D_ccui2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.52549, 0.529412, 1)
+position = Vector2(992.5, 648.5)
+scale = Vector2(3591, 139)
+texture = SubResource("PlaceholderTexture2D_kh285")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+modulate = Color(0, 0.52549, 0.529412, 1)
+position = Vector2(2907.75, 1077)
+scale = Vector2(3678.5, 67.25)
+texture = SubResource("PlaceholderTexture2D_kh285")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(65, 506)
+script = ExtResource("1_pql5o")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_p0gqx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_mupqn")
+
+[node name="CameraDetector" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2048
+script = ExtResource("3_7806m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/CameraDetector"]
+shape = SubResource("CircleShape2D_yi1bk")
+debug_color = Color(0.992157, 0, 0.262745, 0.419608)
+
+[node name="RemoteCamera" type="Camera2D" parent="." node_paths=PackedStringArray("followed_node")]
+script = ExtResource("3_sotbs")
+followed_node = NodePath("../CharacterBody2D")
+
+[node name="CameraArea" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(13, 13)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+limit_flags = 13
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea"]
+position = Vector2(564.5, 311)
+shape = SubResource("RectangleShape2D_tesgw")
+
+[node name="CameraArea4" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(-1141, 12)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+priority_level = -1
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea4"]
+position = Vector2(264.75, 311)
+shape = SubResource("RectangleShape2D_16rms")
+
+[node name="CameraArea5" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(-1740, 497)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+limit_flags = 11
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea5"]
+position = Vector2(564.5, 987)
+shape = SubResource("RectangleShape2D_aqwey")
+
+[node name="CameraArea6" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(-1736, 233)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+limit_flags = 1
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea6"]
+position = Vector2(465.75, 433)
+shape = SubResource("RectangleShape2D_r3uoq")
+
+[node name="CameraArea3" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(2649, 11)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea3"]
+position = Vector2(1041.25, 208)
+shape = SubResource("RectangleShape2D_saf75")
+
+[node name="CameraArea2" type="Area2D" parent="." node_paths=PackedStringArray("collision")]
+position = Vector2(1157, 14)
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("3_1dxw8")
+priority_level = 1
+limit_flags = 8
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraArea2"]
+position = Vector2(712, 469)
+shape = SubResource("RectangleShape2D_i1wjs")
+
+[connection signal="area_entered" from="CharacterBody2D/CameraDetector" to="RemoteCamera" method="_on_camera_detector_area_entered"]
+[connection signal="area_exited" from="CharacterBody2D/CameraDetector" to="RemoteCamera" method="_on_camera_detector_area_exited"]

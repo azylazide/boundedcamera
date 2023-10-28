@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-@onready var camera_bound_detector:= $CameraBoundDetector
-
 const SPEED = 600.0
 
 func _physics_process(delta: float) -> void:

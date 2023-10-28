@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcfigfknx2543"]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Script" path="res://CameraArea.gd" id="1_55yu6"]
+[ext_resource type="Script" path="res://Legacy/CameraArea.gd" id="1_55yu6"]
 [ext_resource type="Script" path="res://Player.gd" id="2_lgomv"]
-[ext_resource type="Script" path="res://ClassicalCamera.gd" id="3_36lrw"]
+[ext_resource type="Script" path="res://Camera Scripts/ClassicalCamera.gd" id="3_36lrw"]
 [ext_resource type="Texture2D" uid="uid://buf780rrstna2" path="res://icon.svg" id="4_ibop6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a03fd"]

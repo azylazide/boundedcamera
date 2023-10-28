@@ -1,5 +1,5 @@
 extends Area2D
-class_name CameraArea
+class_name LegacyCameraArea
 
 @export var priority_level:= 0
 @export_flags("Left","Right","Top","Bottom") var limit_flags:= 0b1111
