@@ -1,26 +1,12 @@
 extends Camera2D
-class_name RemoteCamera
-## A Camera that provides basic limits using [CameraArea]s and [CameraDetector].
+class_name ClassicalRemoteCamera
+## [RemoteCamera] with no custom interpolation.
 ##
-## Solves the current overlapping [CameraArea], clamps the position and interpolates it.
-##
-##
-
-## [Node2D] the camera will center itself.
-@export var followed_node: Node2D
-## Enables or disables the automatic following of the camera.
-@export var follow:= true
-## Initial global position when not following [member follow] node.
-@export var initial_pos:= Vector2.ZERO
-
-@export_group("Smoothing")
-## Weight for vertical interpolation.
-@export var vertical_smoothing:= 0.15
-## Weight for horizontal interpolation.
-@export var horizontal_smoothing:= 0.15
+## Primarily updates [member limit_left], [member limit_right], [member limit_top], and [member limit_bottom].
+## Relies on built-in smoothing ([member position_smoothing_enabled], [member limit_smoothed]) and other features. Will follow parent [Node2D].
 
 @export_group("Editor")
-## Draw on screen the clamped region and the center of the camera.
+## Draw  the center of the camera.
 @export var debug_draw:= true
 
 ## Current [CameraArea]s overlapped for bounds calculation.
@@ -31,17 +17,8 @@ var bridge_inf:= limit_right
 ## Current bounds used by the camera.
 var bounds: BoundsContainer
 
-## Global position clamped to bounds of current [member bounds].
-var clamped_pos: Vector2
-## Interpolated position from [method _updated_position] to [member clamped_pos]
-var interped_pos: Vector2
-
 signal camera_area_added(area: CameraArea)
 signal camera_area_removed(area: CameraArea)
-
-@onready var screen_size:= get_viewport_rect().size
-@onready var camera_span:= Vector2(screen_size.x/zoom.x,screen_size.y/zoom.y)
-
 
 class BoundsContainer:
 ## Class that stores limits.
@@ -66,54 +43,22 @@ class LimitArrayContainer:
 
 func _ready() -> void:
 	bounds = BoundsContainer.new(bridge_inf)
-	if follow:
-		global_position = followed_node.global_position
-	else:
-		global_position = initial_pos + offset
 
 func _draw() -> void:
 	if debug_draw:
-		draw_circle(to_local(global_position),5,Color.WHEAT)
-		_draw_camera_clamp()
-
-## Draw clamped regions.
-func _draw_camera_clamp() -> void:
-	if not bbox_array.is_empty():
-		if bounds.left != -bridge_inf:
-			draw_line(to_local(Vector2(bounds.left+0.5*camera_span.x,global_position.y-300)),to_local(Vector2(bounds.left+0.5*camera_span.x,global_position.y+300)),Color.RED)
-		if bounds.right != bridge_inf:
-			draw_line(to_local(Vector2(bounds.right-0.5*camera_span.x,global_position.y-300)),to_local(Vector2(bounds.right-0.5*camera_span.x,global_position.y+300)),Color.RED)
-		if bounds.top != -bridge_inf:
-			draw_line(to_local(Vector2(global_position.x-300,bounds.top+0.5*camera_span.y)),to_local(Vector2(global_position.x+300,bounds.top+0.5*camera_span.y)),Color.RED)
-		if bounds.bottom != bridge_inf:
-			draw_line(to_local(Vector2(global_position.x-300,bounds.bottom-0.5*camera_span.y)),to_local(Vector2(global_position.x+300,bounds.bottom-0.5*camera_span.y)),Color.RED)
-
+		draw_circle(to_local(get_screen_center_position()),5,Color.WHEAT)
 
 func _process(_delta: float) -> void:
 	pass
 
 
 func _physics_process(_delta: float) -> void:
-	process_camera_position()
-
-## Computes and updates the camera's [member global_position].
-func process_camera_position() -> void:
-	var new_pos:= _updated_position()
 	bounds = _calculate_limits()
-	clamped_pos = _clamp_pos(new_pos)
-	interped_pos = _interp_pos(global_position)
-
-	if follow:
-		global_position = interped_pos
-
+	_update_bounds(bounds)
 	if debug_draw:
 		queue_redraw()
 
-## Returns the [member global_position] with [member offset].
-func _updated_position() -> Vector2:
-	return followed_node.global_position + offset
-
-## Returns [member RemoteCamera.BoundsContainer] calculated from [member bbox_array].
+## Returns [member ClassicalRemoteCamera.BoundsContainer] calculated from [member bbox_array].
 func _calculate_limits() -> BoundsContainer:
 	## Initialize default limits.
 	var default_limits: BoundsContainer = BoundsContainer.new(bridge_inf)
@@ -167,24 +112,12 @@ func _calculate_limits() -> BoundsContainer:
 
 		return default_limits
 
-## Returns the clamped [member global_position] based on [member bounds] and [member camera_span].
-func _clamp_pos(pos: Vector2) -> Vector2:
-	var output:= Vector2.ZERO
-
-	output.x = clampf(pos.x,bounds.left+0.5*camera_span.x,bounds.right-0.5*camera_span.x)
-	output.y = clampf(pos.y,bounds.top+0.5*camera_span.y,bounds.bottom-0.5*camera_span.y)
-
-	return output
-
-## Returns the interpolated [member global_position] from current to [member clamped_pos]
-## with weights of [member horizontal_smoothing] and [member vertical_smoothing].
-func _interp_pos(pos: Vector2) -> Vector2:
-	var output:= Vector2.ZERO
-
-	output.x = lerpf(pos.x,clamped_pos.x,horizontal_smoothing)
-	output.y = lerpf(pos.y,clamped_pos.y,vertical_smoothing)
-
-	return output
+## Update [Camera2D] limits.
+func _update_bounds(bound: BoundsContainer):
+	limit_left = bound.left
+	limit_right = bound.right
+	limit_top = bound.top
+	limit_bottom = bound.bottom
 
 ## Appends a [CameraArea] to [member bbox_array].
 ## [br]Main point of entry to use the remote camera.
@@ -199,3 +132,4 @@ func remove_area(area: CameraArea) -> void:
 	if area is CameraArea:
 		bbox_array.erase(area)
 		camera_area_removed.emit(area)
+
